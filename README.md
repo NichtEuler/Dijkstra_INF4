@@ -26,5 +26,3 @@ von Frankfurt &rarr; Kassel mit 173km der kürzeste Weg aller Optionen und wird 
 festgelegt.
 
 
-
-test for committing code 
