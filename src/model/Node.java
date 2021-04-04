@@ -8,14 +8,17 @@ public class Node {
     private List<Node> path;
     private int id;
 
-    public Node() {
+    public Node()
+    {
     }
 
-    public Node(int id) {
+    public Node(int id)
+    {
         this.id = id;
     }
 
-    public Node(Point p) {
+    public Node(Point p)
+    {
         this.coord = p;
     }
 

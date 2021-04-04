@@ -1,6 +1,7 @@
 package model;
 
-public class Edge {
+public class Edge
+{
     private Node n1;
     private Node n2;
     private int weight;

@@ -4,11 +4,20 @@ import model.Edge;
 import model.Graph;
 import model.Node;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-public class Dijkstra {
+public class Dijkstra
+{
+
+    public Dijkstra(Graph g)
+    {
+        this.graph = g;
+        this.distance = new HashMap<Node, Integer>();
+        this.predecessor = new HashMap<Node, Node>();
+
+
+    }
+
 
     //TODO algorithmus implementieren
     //visitednodes
@@ -25,8 +34,9 @@ public class Dijkstra {
 
 
     private Graph graph;
+    private List<Node> Q; //same as wikipedia syntax --> all nodes from the graph
     private HashMap<Node, Integer> distance; //HashMaps<Key, Wert> speichern zu einem Key keinen oder genau einen Wert. Abfrage des wertes hier distance.get(key)
-    private HashMap<Node, Node> vorgaenger; //TODO übersetzung
+    private HashMap<Node, Node> predecessor;
 
     //private HashSet, TreeSet, LinkedHashSet<Node> visited;
     //(https://stackoverflow.com/questions/13259535/how-to-maintain-a-unique-list-in-java)
@@ -40,15 +50,62 @@ public class Dijkstra {
     //      }
 
 
-    public List<Edge> getNeighbours(Node node) {
+    public void solveDijkstraAlgorithm()
+    {
+        //Steps see wiki:
+
+        //Step 1: Iniitalization
+        this.initialize();
+
+        //The "actual" algorithm
+        while (this.Q.size() != 0)
+        {
+            //get node from Q with smalltest value in distance
+            Map.Entry<Node, Integer> minDistance = Collections.min(this.distance.entrySet(),
+                    Comparator.comparing(Map.Entry::getValue));
+            Node u = minDistance.getKey();
+
+            //remove u from Q
+            this.Q.remove(u);
+
+
+
+
+
+        }
+
+
+    }
+
+
+    private void initialize()
+    {
+        int numberOfNodes = this.graph.getSize();
+        for (int i = 0; i < numberOfNodes; i++)
+        {
+            Node currentNode = this.graph.getNode(i);
+            this.distance.put(currentNode, Integer.MAX_VALUE);
+            this.predecessor.put(currentNode, null);
+        }
+        this.distance.put(this.graph.getStart(), 0);
+        this.Q = new ArrayList<Node>(this.graph.getNodeList()); //to not delete nodes from original graph
+    }
+
+
+    public List<Edge> getNeighbours(Node node)
+    {
         List<Edge> neighbours = new ArrayList<>();
-        for (Edge edge : graph.getEdgeList()) {
-            if (edge.hasNode(node)) {
+        for (Edge edge : graph.getEdgeList())
+        {
+            if (edge.hasNode(node))
+            {
                 neighbours.add(edge);
             }
 
         }
         return neighbours;
     }
+
+
 
 }
