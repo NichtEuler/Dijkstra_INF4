@@ -87,4 +87,19 @@ public class Graph
             this.edgeList.add(edge);
         }
     }
+
+
+    public List<Edge> getNeighbours(Node node)
+    {
+        List<Edge> neighbours = new ArrayList<>();
+        for (Edge edge : this.edgeList)
+        {
+            if (edge.hasNode(node))
+            {
+                neighbours.add(edge);
+            }
+
+        }
+        return neighbours;
+    }
 }

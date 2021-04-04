@@ -6,6 +6,8 @@ import view.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main
@@ -30,8 +32,8 @@ public class Main
         Dijkstra dijkstraAlgo = new Dijkstra(g);
 
         //solve for given graph
-        dijkstraAlgo.solveDijkstraAlgorithm();
-
+        ArrayList<Node> shortestPath = dijkstraAlgo.getShortestPath();
+        System.out.println(shortestPath);
 
         //SwingUtilities.invokeLater(MainWindow::new);
 

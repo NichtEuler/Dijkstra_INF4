@@ -28,6 +28,12 @@ public class Edge
         return n2;
     }
 
+    public Node getSecondNode(Node n1_in)
+    {
+        if (this.n1 == n1_in) return this.n2;
+        else return this.n1;
+    }
+
     public boolean hasNode(Node node){return node==n1 || node ==n2;}
 
     private int calcWeight(Node n1, Node n2) {
