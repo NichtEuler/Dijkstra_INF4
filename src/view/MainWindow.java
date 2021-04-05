@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 
+    private JLabel label;
+
     public MainWindow() {
         GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice defaultScreen = gEnv.getDefaultScreenDevice();
@@ -24,5 +26,9 @@ public class MainWindow extends JFrame {
         setResizable(false);
         defaultScreen.setFullScreenWindow(this);
         setVisible(true);
+
+        setLayout(new FlowLayout());
+        label = new JLabel("flag");
+        add(label);
     }
 }

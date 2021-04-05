@@ -6,16 +6,12 @@ import model.Node;
 
 import java.util.*;
 
-public class Dijkstra
-{
+public class Dijkstra {
 
-    public Dijkstra(Graph g)
-    {
+    public Dijkstra(Graph g) {
         this.graph = g;
         this.distance = new HashMap<Node, Integer>();
         this.predecessor = new HashMap<Node, Node>();
-
-
     }
 
 
@@ -50,8 +46,7 @@ public class Dijkstra
     //      }
 
 
-    public ArrayList<Node> getShortestPath()
-    {
+    public ArrayList<Node> getShortestPath() {
         ArrayList<Node> shortestPath = new ArrayList<Node>();
         this.solveDijkstraAlgorithm();
 
@@ -59,8 +54,7 @@ public class Dijkstra
 
         Node u = this.graph.getEnd();
         // Der Vorgänger des Startknotens ist null
-        while(this.predecessor.get(u) != null)
-        {
+        while (this.predecessor.get(u) != null) {
             u = this.predecessor.get(u);
             shortestPath.add(0, u);
         }
@@ -68,31 +62,26 @@ public class Dijkstra
         return shortestPath;
     }
 
-    private void solveDijkstraAlgorithm()
-    {
+    private void solveDijkstraAlgorithm() {
         //Steps see wiki:
 
         //Step 1: Iniitalization
         this.initialize();
 
         //The "actual" algorithm
-        while (this.Q.size() != 0)
-        {
+        while (this.Q.size() != 0) {
             //get node from Q with smalltest value in distance
             //Map.Entry<Node, Integer> minDistance = Collections.min(this.distance.entrySet(),
             //        Comparator.comparing(Map.Entry::getValue));
             //Node u = minDistance.getKey();
             int dist = Integer.MAX_VALUE;
             Node u = Q.get(0);
-            for (Node e : Q)
-            {
-                if (this.distance.get(e) < dist)
-                {
+            for (Node e : Q) {
+                if (this.distance.get(e) < dist) {
                     dist = this.distance.get(e);
                     u = e;
                 }
             }
-
 
 
             //remove u from Q
@@ -100,8 +89,7 @@ public class Dijkstra
 
             //find all neighbors v of u
             List<Edge> V = this.graph.getNeighbours(u);
-            for (Edge edgeBetweenUandV : V)
-            {
+            for (Edge edgeBetweenUandV : V) {
                 Node v = edgeBetweenUandV.getSecondNode(u);
                 if (Q.contains(v))  // falls noch nicht berechnet
                 {
@@ -113,11 +101,9 @@ public class Dijkstra
     }
 
 
-    private void initialize()
-    {
+    private void initialize() {
         int numberOfNodes = this.graph.getSize();
-        for (int i = 0; i < numberOfNodes; i++)
-        {
+        for (int i = 0; i < numberOfNodes; i++) {
             Node currentNode = this.graph.getNode(i);
             this.distance.put(currentNode, Integer.MAX_VALUE);
             this.predecessor.put(currentNode, null);
@@ -127,18 +113,14 @@ public class Dijkstra
     }
 
 
-    private void distance_update(Node u, Node v, Edge e)
-    {
+    private void distance_update(Node u, Node v, Edge e) {
         // Weglänge vom Startknoten nach v über u
         int alternativeDistance = this.distance.get(u) + e.getWeight();
-        if (alternativeDistance < this.distance.get(v))
-        {
+        if (alternativeDistance < this.distance.get(v)) {
             this.distance.put(v, alternativeDistance);
             this.predecessor.put(v, u);
         }
     }
-
-
 
 
 }
