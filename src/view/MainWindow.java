@@ -1,5 +1,7 @@
 package view;
 
+import model.Graph;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -8,8 +10,10 @@ import java.awt.event.KeyEvent;
 public class MainWindow extends JFrame {
 
     private JLabel label;
+    private Graph graph;
 
-    public MainWindow() {
+    public MainWindow(Graph graph) {
+        this.graph = graph;
         GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice defaultScreen = gEnv.getDefaultScreenDevice();
         addKeyListener(new KeyAdapter() {
@@ -27,8 +31,17 @@ public class MainWindow extends JFrame {
         defaultScreen.setFullScreenWindow(this);
         setVisible(true);
 
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout());
+        JPanel subPanel = new JPanel();
         label = new JLabel("flag");
-        add(label);
+        label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 40));
+        subPanel.add(label);
+        add(subPanel, BorderLayout.CENTER);
+
+        JPanel graphView = new GraphView(graph);
+        add(graphView, BorderLayout.CENTER);
+
+
     }
+
 }

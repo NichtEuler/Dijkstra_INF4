@@ -31,7 +31,7 @@ public class Main {
         ArrayList<Node> shortestPath = dijkstraAlgo.getShortestPath();
         System.out.println(shortestPath);
 
-        SwingUtilities.invokeLater(MainWindow::new);
+        SwingUtilities.invokeLater(() -> new MainWindow(g));
 
     }
 
@@ -41,8 +41,8 @@ public class Main {
         Graph graph = new Graph();
 
         for (int i = 0; i < 10; i++) {
-            int randomNumX = ThreadLocalRandom.current().nextInt(100, 1000 + 1);
-            int randomNumY = ThreadLocalRandom.current().nextInt(100, 1000 + 1);
+            int randomNumX = ThreadLocalRandom.current().nextInt(100, 1400 + 1);
+            int randomNumY = ThreadLocalRandom.current().nextInt(100, 800 + 1);
 
             Point p = new Point(randomNumX, randomNumY);
             graph.addNode(p);
