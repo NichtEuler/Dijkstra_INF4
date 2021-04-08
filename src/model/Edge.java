@@ -1,17 +1,17 @@
 package model;
 
-public class Edge
-{
+import java.util.Random;
+
+public class Edge {
     private Node n1;
     private Node n2;
-    private int weight;
-
+    private int weight = 1;
 
     public Edge(Node n1, Node n2) {
         this.n1 = n1;
         this.n2 = n2;
-        this.weight = calcWeight(n1, n2);
     }
+
     public void setWeight(int weight) {
         this.weight = weight;
     }
@@ -28,16 +28,12 @@ public class Edge
         return n2;
     }
 
-    public Node getSecondNode(Node n1_in)
-    {
+    public Node getSecondNode(Node n1_in) {
         if (this.n1 == n1_in) return this.n2;
         else return this.n1;
     }
 
-    public boolean hasNode(Node node){return node==n1 || node ==n2;}
-
-    private int calcWeight(Node n1, Node n2) {
-        return (int) (Math.sqrt(Math.pow(n1.getX() - n2.getX(), 2)) + Math.pow(n1.getY() - n2.getY(), 2));
+    public boolean hasNode(Node node) {
+        return node == n1 || node == n2;
     }
-
 }

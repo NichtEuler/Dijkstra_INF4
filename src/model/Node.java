@@ -51,9 +51,4 @@ public class Node {
     public int getId() {
         return id;
     }
-
-    @Override
-    public String toString() {
-        return "Node " + id;
-    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import control.Dijkstra;
 import model.Graph;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow(Graph graph) {
         this.graph = graph;
+        JPanel graphView = new GraphView(graph);
         GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice defaultScreen = gEnv.getDefaultScreenDevice();
         addKeyListener(new KeyAdapter() {
@@ -21,6 +23,13 @@ public class MainWindow extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(0);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    graph.resetGraph();
+                    graph.generateGraph();
+                    Dijkstra dijkstraAlgo = new Dijkstra(graph);
+                    dijkstraAlgo.getShortestPath();
+                    graphView.repaint();
                 }
             }
         });
@@ -30,18 +39,8 @@ public class MainWindow extends JFrame {
         setResizable(false);
         defaultScreen.setFullScreenWindow(this);
         setVisible(true);
-
         setLayout(new BorderLayout());
-        JPanel subPanel = new JPanel();
-        label = new JLabel("flag");
-        label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 40));
-        subPanel.add(label);
-        add(subPanel, BorderLayout.CENTER);
-
-        JPanel graphView = new GraphView(graph);
         add(graphView, BorderLayout.CENTER);
-
-
     }
 
 }

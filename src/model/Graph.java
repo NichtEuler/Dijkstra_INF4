@@ -3,6 +3,7 @@ package model;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Graph {
     private Node start;
@@ -11,8 +12,18 @@ public class Graph {
 
     private List<Node> nodeList = new ArrayList<Node>();
     private List<Edge> edgeList = new ArrayList<Edge>();
-
     private List<Node> solvedPath = new ArrayList<Node>();
+
+    public void resetGraph()
+    {
+        start = null;
+        end = null;
+        counter = 0;
+
+        nodeList.removeAll(nodeList);
+        edgeList.removeAll(edgeList);
+        solvedPath.removeAll(solvedPath);
+    }
 
     public void addNode(Point p) {
         Node node = new Node(p);
@@ -94,7 +105,6 @@ public class Graph {
         }
     }
 
-
     public List<Edge> getNeighbours(Node node) {
         List<Edge> neighbours = new ArrayList<>();
         for (Edge edge : this.edgeList) {
@@ -103,5 +113,66 @@ public class Graph {
             }
         }
         return neighbours;
+    }
+
+    public Edge getEdge(Node n1, Node n2) {
+        for (Edge edge :
+                this.edgeList) {
+            if (edge.hasNode(n1) && edge.hasNode(n2)) {
+                return edge;
+            }
+        }
+        return null;
+    }
+
+    public void generateGraph() {
+        //Sets starting point at fixed position
+        this.addNode(new Point(50, 50));
+
+        generateNodes();
+
+        generateEdges();
+
+        this.setEnd(this.getNode(this.getSize() - 1));
+    }
+
+    private void generateNodes() {
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 0; j < this.getNodeList().size(); j++) {
+                int randomNumX = getRandomNumberUsingNextInt(100, 1400 + 1);
+                int randomNumY = getRandomNumberUsingNextInt(100, 800 + 1);
+                int boundX = this.getNodeList().get(j).getX();
+                int boundY = this.getNodeList().get(j).getY();
+
+                if (!((randomNumX <= boundX + 120 && randomNumX >= boundX - 120) &&
+                        (randomNumY <= boundY + 120 && randomNumY >= boundY - 120))) {
+                    Point p = new Point(randomNumX, randomNumY);
+                    this.addNode(p);
+                    break;
+                } else {
+                    if (i - 1 <= 0)
+                        i = 0;
+                    else
+                        i--;
+                }
+            }
+        }
+    }
+
+    private void generateEdges() {
+        for (int i = 0; i < this.getSize() *1.2; i++) {
+            int randNode1 = getRandomNumberUsingNextInt(0, this.getSize());
+            int randNode2 = getRandomNumberUsingNextInt(0, this.getSize());
+            Edge edge = new Edge(this.getNode(randNode1), this.getNode(randNode2));
+
+            edge.setWeight(getRandomNumberUsingNextInt(1, 20));
+            this.addEdge(edge);
+        }
+    }
+
+    public int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 }
