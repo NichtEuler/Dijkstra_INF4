@@ -24,36 +24,50 @@ public class Main {
         //generate example graph just for testing purpose
         Graph g = generateGraph();
 
-        //Initialize Djikstra instance
+        //Initialize Dijkstra instance
         Dijkstra dijkstraAlgo = new Dijkstra(g);
 
         //solve for given graph
-        ArrayList<Node> shortestPath = dijkstraAlgo.getShortestPath();
-        System.out.println(shortestPath);
+        dijkstraAlgo.getShortestPath();
+        System.out.println(g.getSolvedPath());
 
         SwingUtilities.invokeLater(() -> new MainWindow(g));
 
     }
 
-
-    //ToDo TestGraph
     public static Graph generateGraph() {
         Graph graph = new Graph();
 
-        for (int i = 0; i < 10; i++) {
-            int randomNumX = ThreadLocalRandom.current().nextInt(100, 1400 + 1);
-            int randomNumY = ThreadLocalRandom.current().nextInt(100, 800 + 1);
+        graph.addNode(new Point(50, 50));
 
-            Point p = new Point(randomNumX, randomNumY);
-            graph.addNode(p);
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 0; j < graph.getNodeList().size(); j++) {
+                int randomNumX = ThreadLocalRandom.current().nextInt(100, 1400 + 1);
+                int randomNumY = ThreadLocalRandom.current().nextInt(100, 800 + 1);
+                int boundX = graph.getNodeList().get(j).getX();
+                int boundY = graph.getNodeList().get(j).getY();
+
+                if (!((randomNumX <= boundX + 120 && randomNumX >= boundX - 120) &&
+                        (randomNumY <= boundY + 120 && randomNumY >= boundY - 120))) {
+                    Point p = new Point(randomNumX, randomNumY);
+                    graph.addNode(p);
+                    break;
+                } else {
+                    if (i - 1 <= 0)
+                        i = 0;
+                    else
+                        i--;
+                }
+            }
         }
 
         for (int i = 0; i < graph.getSize() * 2; i++) {
-            int randNode1 = ThreadLocalRandom.current().nextInt(1, graph.getSize() - 1);
-            int randNode2 = ThreadLocalRandom.current().nextInt(1, graph.getSize() - 1);
+            int randNode1 = ThreadLocalRandom.current().nextInt(0, graph.getSize());
+            int randNode2 = ThreadLocalRandom.current().nextInt(0, graph.getSize());
+
             graph.addEdge(new Edge(graph.getNode(randNode1), graph.getNode(randNode2)));
         }
-        //TODO generierte Knoten und kanten automatisch anzeichnen
 
 //        Point n1 = new Point(3, 1);
 //        Point n2 = new Point(12, 4);

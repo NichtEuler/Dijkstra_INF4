@@ -46,7 +46,7 @@ public class Dijkstra {
     //      }
 
 
-    public ArrayList<Node> getShortestPath() {
+    public void getShortestPath() {
         ArrayList<Node> shortestPath = new ArrayList<Node>();
         this.solveDijkstraAlgorithm();
 
@@ -58,8 +58,8 @@ public class Dijkstra {
             u = this.predecessor.get(u);
             shortestPath.add(0, u);
         }
+        graph.setSolvedPath(shortestPath);
 
-        return shortestPath;
     }
 
     private void solveDijkstraAlgorithm() {

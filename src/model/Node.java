@@ -8,9 +8,6 @@ public class Node {
     private List<Node> path;
     private int id;
 
-    public Node()
-    {
-    }
 
     public Node(int id)
     {

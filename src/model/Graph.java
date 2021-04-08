@@ -4,8 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph
-{
+public class Graph {
     private Node start;
     private Node end;
     private int counter = 0;
@@ -13,14 +12,14 @@ public class Graph
     private List<Node> nodeList = new ArrayList<Node>();
     private List<Edge> edgeList = new ArrayList<Edge>();
 
-    public void addNode(Point p)
-    {
+    private List<Node> solvedPath = new ArrayList<Node>();
+
+    public void addNode(Point p) {
         Node node = new Node(p);
         addNode(node);
     }
 
-    private void addNode(Node node)
-    {
+    private void addNode(Node node) {
         node.setId(counter++);
         this.nodeList.add(node);
         if (counter == 1) {
@@ -29,13 +28,11 @@ public class Graph
 
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return this.counter;
     }
 
-    public Node getNode(int id)
-    {
+    public Node getNode(int id) {
         return nodeList.get(id);
     }
 
@@ -71,34 +68,39 @@ public class Graph
         return start;
     }
 
-    public Node getEnd()
-    {
+    public Node getEnd() {
         return end;
     }
 
-    public boolean isStart(Node node) {return node == start;}
-    public boolean isEnd(Node node) {return node == end;}
+    public List<Node> getSolvedPath() {
+        return solvedPath;
+    }
 
-    public void addEdge(Edge edge)
-    {
-        //TODO schauen ob nodes unterschiedlich sind dann edgelist.add
-        if (!edge.getNode1().equals(edge.getNode2()))
-        {
+    public void setSolvedPath(List<Node> solvedPath) {
+        this.solvedPath = solvedPath;
+    }
+
+    public boolean isStart(Node node) {
+        return node == start;
+    }
+
+    public boolean isEnd(Node node) {
+        return node == end;
+    }
+
+    public void addEdge(Edge edge) {
+        if (!edge.getNode1().equals(edge.getNode2())) {
             this.edgeList.add(edge);
         }
     }
 
 
-    public List<Edge> getNeighbours(Node node)
-    {
+    public List<Edge> getNeighbours(Node node) {
         List<Edge> neighbours = new ArrayList<>();
-        for (Edge edge : this.edgeList)
-        {
-            if (edge.hasNode(node))
-            {
+        for (Edge edge : this.edgeList) {
+            if (edge.hasNode(node)) {
                 neighbours.add(edge);
             }
-
         }
         return neighbours;
     }

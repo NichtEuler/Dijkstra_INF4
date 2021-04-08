@@ -6,11 +6,13 @@ import model.Node;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GraphView extends JPanel {
     private Graph graph;
     private Graphics2D g2;
-    private int radius = 50;
+    private int radius = 30;
 
     public GraphView(Graph graph) {
         this.graph = graph;
@@ -20,34 +22,65 @@ public class GraphView extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
+        g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
+        for (Edge edge :
+                graph.getEdgeList()) {
+            paintEdge(edge, Color.BLACK);
+        }
+
         for (Node node :
                 graph.getNodeList()) {
-            g.setColor(Color.red);
-            g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
+            paintNode(node, Color.BLUE);
+        }
+        paintSolvedPath();
 
+        drawStartNode(graph.getStart());
+        drawEndNode(graph.getEnd());
+    }
 
+    private void paintSolvedPath() {
+        List<Edge> edgePath = new ArrayList<Edge>();
 
+        for (int i = 0; i < graph.getSolvedPath().size()-1; i++) {
+            edgePath.add(new Edge(graph.getSolvedPath().get(i), graph.getSolvedPath().get(i+1)));
         }
 
         for (Edge edge :
-                graph.getEdgeList()) {
-            Point from = edge.getNode1().getCoord();
-            Point to = edge.getNode2().getCoord();
-            g2.setStroke(new BasicStroke(8));
-            g.drawLine(from.x, from.y, to.x, to.y);
-            int x = (from.x + to.x)/2;
-            int y = (from.y + to.y)/2;
-
+                edgePath) {
+            paintSolvedPath(edge);
+        }
+        for (Node node :
+                graph.getSolvedPath()) {
+            paintNode(node, Color.magenta);
         }
     }
-    public static Color parseColor(String colorStr) {
-        return new Color(
-                Integer.valueOf(colorStr.substring(1, 3), 16),
-                Integer.valueOf(colorStr.substring(3, 5), 16),
-                Integer.valueOf(colorStr.substring(5, 7), 16));
+
+    private void drawEndNode(Node end) {
+        paintNode(end, Color.GREEN);
+    }
+
+    private void drawStartNode(Node start) {
+        paintNode(start, Color.BLACK);
+    }
+
+    private void paintNode(Node node, Color color) {
+        g2.setColor(color);
+        g2.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
+    }
+
+    private void paintEdge(Edge edge, Color color) {
+        Point from = edge.getNode1().getCoord();
+        Point to = edge.getNode2().getCoord();
+        g2.setColor(color);
+        g2.setStroke(new BasicStroke(8));
+        g2.drawLine(from.x, from.y, to.x, to.y);
+        int x = (from.x + to.x) / 2;
+        int y = (from.y + to.y) / 2;
+    }
+    private void paintSolvedPath(Edge edge){
+        paintEdge(edge, Color.CYAN);
     }
 }
