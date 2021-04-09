@@ -10,11 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 
-    private JLabel label;
-    private Graph graph;
-
     public MainWindow(Graph graph) {
-        this.graph = graph;
         JPanel graphView = new GraphView(graph);
         GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice defaultScreen = gEnv.getDefaultScreenDevice();
@@ -42,5 +38,4 @@ public class MainWindow extends JFrame {
         setLayout(new BorderLayout());
         add(graphView, BorderLayout.CENTER);
     }
-
 }

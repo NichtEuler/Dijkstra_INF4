@@ -10,12 +10,11 @@ public class Graph {
     private Node end;
     private int counter = 0;
 
-    private List<Node> nodeList = new ArrayList<Node>();
-    private List<Edge> edgeList = new ArrayList<Edge>();
-    private List<Node> solvedPath = new ArrayList<Node>();
+    private List<Node> nodeList = new ArrayList<>();
+    private List<Edge> edgeList = new ArrayList<>();
+    private List<Node> solvedPath = new ArrayList<>();
 
-    public void resetGraph()
-    {
+    public void resetGraph() {
         start = null;
         end = null;
         counter = 0;
@@ -137,11 +136,12 @@ public class Graph {
     }
 
     private void generateNodes() {
-        for (int i = 0; i < 10; i++) {
 
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        for (int i = 0; i < 10; i++) {
             for (int j = 0; j < this.getNodeList().size(); j++) {
-                int randomNumX = getRandomNumberUsingNextInt(100, 1400 + 1);
-                int randomNumY = getRandomNumberUsingNextInt(100, 800 + 1);
+                int randomNumX = getRandomNumberUsingNextInt(100, size.width - 100);
+                int randomNumY = getRandomNumberUsingNextInt(100, size.height - 100);
                 int boundX = this.getNodeList().get(j).getX();
                 int boundY = this.getNodeList().get(j).getY();
 
@@ -161,7 +161,7 @@ public class Graph {
     }
 
     private void generateEdges() {
-        for (int i = 0; i < this.getSize() *1.2; i++) {
+        for (int i = 0; i < this.getSize() * 1.2; i++) {
             int randNode1 = getRandomNumberUsingNextInt(0, this.getSize());
             int randNode2 = getRandomNumberUsingNextInt(0, this.getSize());
             Edge edge = new Edge(this.getNode(randNode1), this.getNode(randNode2));

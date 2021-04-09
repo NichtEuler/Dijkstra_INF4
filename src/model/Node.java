@@ -4,18 +4,16 @@ import java.awt.*;
 import java.util.List;
 
 public class Node {
+
     private Point coord = new Point();
     private List<Node> path;
     private int id;
 
-
-    public Node(int id)
-    {
+    public Node(int id) {
         this.id = id;
     }
 
-    public Node(Point p)
-    {
+    public Node(Point p) {
         this.coord = p;
     }
 
@@ -26,7 +24,6 @@ public class Node {
     public void setCoord(int x, int y) {
         coord.setLocation(x, y);
     }
-
 
     public Point getCoord() {
         return coord;

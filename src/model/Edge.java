@@ -3,6 +3,7 @@ package model;
 import java.util.Random;
 
 public class Edge {
+
     private Node n1;
     private Node n2;
     private int weight = 1;
