@@ -1,17 +1,8 @@
 import control.Dijkstra;
 import model.Graph;
-import model.Edge;
-import model.Node;
 import view.MainWindow;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-
 public class Main {
 
 

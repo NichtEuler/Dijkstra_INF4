@@ -1,7 +1,4 @@
 package model;
-
-import java.util.Random;
-
 public class Edge {
 
     private Node n1;
