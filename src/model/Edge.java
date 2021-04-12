@@ -8,10 +8,13 @@ public class Edge {
     public Edge(Node n1, Node n2) {
         this.n1 = n1;
         this.n2 = n2;
+        setWeight();
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWeight() {
+
+        double weight = Math.sqrt(Math.pow(n1.getX() - n2.getX(), 2) + Math.pow(n1.getY() - n2.getY(), 2));
+        this.weight = (int) Math.ceil(weight / 100);
     }
 
     public int getWeight() {

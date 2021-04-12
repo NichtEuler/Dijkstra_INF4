@@ -9,6 +9,7 @@ public class Graph {
     private Node start;
     private Node end;
     private int counter = 0;
+    private int nodeCount = 20;
 
     private List<Node> nodeList = new ArrayList<>();
     private List<Edge> edgeList = new ArrayList<>();
@@ -37,6 +38,12 @@ public class Graph {
         }
 
     }
+
+    public void setNodeCount(int nodeCount) {
+        this.nodeCount = nodeCount;
+    }
+
+    public int getNodeCount() { return this.nodeCount; }
 
     public int getSize() {
         return this.counter;
@@ -138,7 +145,7 @@ public class Graph {
     private void generateNodes() {
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < this.nodeCount; i++) {
             for (int j = 0; j < this.getNodeList().size(); j++) {
                 int randomNumX = getRandomNumberUsingNextInt(100, size.width - 100);
                 int randomNumY = getRandomNumberUsingNextInt(100, size.height - 100);
@@ -165,8 +172,6 @@ public class Graph {
             int randNode1 = getRandomNumberUsingNextInt(0, this.getSize());
             int randNode2 = getRandomNumberUsingNextInt(0, this.getSize());
             Edge edge = new Edge(this.getNode(randNode1), this.getNode(randNode2));
-
-            edge.setWeight(getRandomNumberUsingNextInt(1, 20));
             this.addEdge(edge);
         }
     }
