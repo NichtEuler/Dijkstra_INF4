@@ -12,7 +12,7 @@ import java.util.List;
 public class GraphView extends JPanel {
     private Graph graph;
     private Graphics2D g2;
-    private int radius = 30;
+    private int radius = 20;
 
     public GraphView(Graph graph) {
         this.graph = graph;

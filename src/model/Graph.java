@@ -9,7 +9,7 @@ public class Graph {
     private Node start;
     private Node end;
     private int counter = 0;
-    private int nodeCount = 20;
+    private int nodeCount = 10;
 
     private List<Node> nodeList = new ArrayList<>();
     private List<Edge> edgeList = new ArrayList<>();

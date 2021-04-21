@@ -58,8 +58,9 @@ public class Dijkstra {
             u = this.predecessor.get(u);
             shortestPath.add(0, u);
         }
-        graph.setSolvedPath(shortestPath);
-
+        if(u == graph.getStart()) { // check if the last node == startnode
+            graph.setSolvedPath(shortestPath);
+        }
     }
 
     private void solveDijkstraAlgorithm() {

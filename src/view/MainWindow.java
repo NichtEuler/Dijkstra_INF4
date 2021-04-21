@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 public class MainWindow extends JFrame {
 
     public MainWindow(Graph graph) {
+        JLabel label = new JLabel("  Push backspace for new graph; Push ESC to close window", JLabel.LEFT);
         JPanel graphView = new GraphView(graph);
         GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice defaultScreen = gEnv.getDefaultScreenDevice();
@@ -37,5 +38,6 @@ public class MainWindow extends JFrame {
         setVisible(true);
         setLayout(new BorderLayout());
         add(graphView, BorderLayout.CENTER);
+        add(label, BorderLayout.NORTH);
     }
 }
