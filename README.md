@@ -1,4 +1,4 @@
-# Dijkstra_INF4
+# Dijkstra_INF4test
 
 Der Dijkstra-Algorithmus dient zur Pfadfindung in
 einem [Kantengewichteten Graph](https://de.wikipedia.org/wiki/Kantengewichteter_Graph). In einem Kantengewichteten Graph
